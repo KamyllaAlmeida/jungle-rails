@@ -1,7 +1,7 @@
 <article class="product">
   <header >
   <% if product.quantity <= 0 %>
-    <span >teste</span>
+    <span class="badge">teste</span>
   <% end %>
     <%= link_to product do %>
       <%= image_tag product.image.thumb, alt: product.name %>
