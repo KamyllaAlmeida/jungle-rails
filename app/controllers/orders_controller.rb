@@ -2,6 +2,9 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    puts "KAMYLLAAAAAA", @order.line_items.first.product.id
+    puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa"
+    enhanced_cart1
   end
 
   def create
@@ -21,6 +24,14 @@ class OrdersController < ApplicationController
 
   private
 
+  def enhanced_cart1
+    @order.line_items.each do |item|
+      @enhanced_cart1 ||= Product.where(id: item.product.id).map {|product| { product:product, order: item}  }
+    end
+
+  end
+  #helper_method :enhanced_cart1
+
   def empty_cart!
     # empty hash means no products in cart :)
     update_cart({})
@@ -39,7 +50,7 @@ class OrdersController < ApplicationController
     order = Order.new(
       email: params[:stripeEmail],
       total_cents: cart_subtotal_cents,
-      stripe_charge_id: stripe_charge.id, # returned by stripe
+      stripe_charge_id: stripe_charge.id # returned by stripe
     )
 
     enhanced_cart.each do |entry|
