@@ -1,5 +1,8 @@
 class Admin::CategoriesController < ApplicationController
 
+  #include HttpAuthConcern
+  http_basic_authenticate_with name: ENV['STRIPE_USERNAME'], password: ENV['STRIPE_PASSWORD']
+
   def index
     @categories = Category.order(id: :desc).all
   end
