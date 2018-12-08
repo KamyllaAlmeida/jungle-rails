@@ -33,6 +33,7 @@ cat3 = Category.find_or_create_by! name: 'Furniture'
 
 puts "Re-creating Products ..."
 
+
 Product.destroy_all
 
 cat1.products.create!({
@@ -131,6 +132,78 @@ cat3.products.create!({
   quantity: 23,
   price: 2_483.75
 })
+
+## Find Products
+
+puts "Finding Products ..."
+
+prod1 = Product.first
+prod2 = Product.second
+prod3 = Product.third
+
+## Users
+
+User.create!({
+  id: 1,
+  first_name: "Bruno",
+  last_name: "Almeida",
+  email: "bruno@gmail.com",
+  password: "123",
+  password_confirmation: "123"
+
+})
+
+
+# Reviews
+
+Review.create!({
+  product: prod1,
+  user_id: 1,
+  description: "The best product that I have bought.",
+  rating: 4  
+})
+
+Review.create!({
+  product: prod1,
+  user_id: 1,
+  description: "I do not like this product.",
+  rating: 1  
+})
+
+Review.create!({
+  product: prod1,
+  user_id: 1,
+  description: "It is ok.",
+  rating: 3  
+})
+
+
+Review.create!({
+  product: prod2,
+  user_id: 1,
+  description: "Lorem ipsum feugiat nibh netus sociosqu malesuada magna viverra justo nisi, sed euismod aenean netus varius ornare tempor urna nisi, cras netus cubilia litora semper torquent cras aptent varius. luctus amet erat blandit donec suscipit, pretium erat nunc felis conubia, vehicula porttitor ac vitae. nec elit placerat mattis elit sem ipsum litora hendrerit integer, eu vestibulum mi vulputate himenaeos egestas aenean fringilla.",
+  rating: 4  
+})
+
+Review.create!({
+  product: prod2,
+  user_id: 1,
+  description: "I do not like this product.",
+  rating: 1  
+})
+
+Review.create!({
+  product: prod2,
+  user_id: 1,
+  description: "It is ok.",
+  rating: 3  
+})
+
+
+
+
+
+
 
 
 puts "DONE!"

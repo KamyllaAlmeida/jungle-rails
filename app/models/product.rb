@@ -5,8 +5,8 @@ class Product < ActiveRecord::Base
 
   belongs_to :category
 
-  has_many :line_items
-  has_many :review
+  has_many :line_items, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   validates :name, presence: true
   validates :price, presence: true
