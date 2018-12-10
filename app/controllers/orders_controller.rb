@@ -2,8 +2,6 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    puts "KAMYLLAAAAAA", @order.line_items.first.product.id
-    puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa"
     enhanced_cart1
   end
 
@@ -23,14 +21,6 @@ class OrdersController < ApplicationController
   end
 
   private
-
-  def enhanced_cart1
-    @order.line_items.each do |item|
-      @enhanced_cart1 ||= Product.where(id: item.product.id).map {|product| { product:product, order: item}  }
-    end
-
-  end
-  #helper_method :enhanced_cart1
 
   def empty_cart!
     # empty hash means no products in cart :)

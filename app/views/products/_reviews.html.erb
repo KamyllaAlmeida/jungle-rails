@@ -1,9 +1,22 @@
 <tr>
   <td>
-    <p><%= review.description %></p>
+    <p class="description"><b>Creation date: <%= review.created_at.strftime("%Y-%m-%d") %></b></p>
+    <p class="description"><%= review.description %></p>
+    <% review.rating.to_i.times do  %>
+      <span class="glyphicon glyphicon-star"></span>
+    <% end %>
+    <% blank_stars.to_i.times do %>
+      <span class="glyphicon glyphicon-star-empty"></span>
+    <% end %>
+    <br>
+    <br>
+
   </td>
-  <td>
-    <p><%= review.rating %></p>
-  </td>
+    <% if current_user && review.user_id == current_user.id %>
+    <td>
+      <%= link_to fa_icon('trash'), [@product, review], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+    </td>
+  <% end %>
+  
 </tr>
 

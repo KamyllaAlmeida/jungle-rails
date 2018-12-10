@@ -2,7 +2,13 @@
 
   <header class="page-header">
     <h1><%= link_to @product.category.name, @product.category %> &raquo; <%= @product.name %></h1>
+
+    <% if flash[:error] %>
+      <div class="alert alert-danger"><%= flash[:error] %></div>
+    <% end %>
   </header>
+
+ 
 
   <article class="product-detail">
 
@@ -26,19 +32,22 @@
       </div>
     </div>
   </article>
-  <%= render 'create_review'%>
-  <h3>Reviews<h3>
-  <div class="panel panel-default items">
-  <table class="table table-bordered">
+  <% if current_user %>
+    <%= render 'create_review'%>
+  <% end %>
+  
+  <header class="page-header">
+    <h3>Reviews</h3>
+  </header>
+  <div >
+  <table>
     <thead>
       <tr>
-        <th>Description</th>
-        <th>Rating</th>
       </tr>
     </thead>
     <tbody>
       <% @reviews.each do |item| %>
-        <%= render 'reviews', review: item %>
+        <%= render 'reviews', review: item[:review], blank_stars: item[:blank_stars]  %>
       <% end %>
     </tbody>
     </tfoot>
